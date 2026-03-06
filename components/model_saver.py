@@ -1,21 +1,13 @@
+import joblib
 import os
-import pickle
-from src.logger import logger
-from src.exception import CustomException
-import sys
 
 
 class ModelSaver:
 
     def save_model(self, model):
-        try:
 
-            os.makedirs("models", exist_ok=True)
+        os.makedirs("artifacts/model", exist_ok=True)
 
-            with open("models/recommendation_model.pkl", "wb") as f:
-                pickle.dump(model, f)
+        joblib.dump(model, "artifacts/model/best_svd_model.pkl")
 
-            logger.info("Model saved successfully")
-
-        except Exception as e:
-            raise CustomException(e, sys)
+        print("Model saved successfully")

@@ -1,31 +1,43 @@
-from surprise import Dataset, Reader, SVD
+from surprise import SVD, Dataset, Reader
 from surprise.model_selection import train_test_split
-from src.logger import logger
-from src.exception import CustomException
-import sys
+from surprise import accuracy
 
 
 class ModelTraining:
 
-    def train_model(self, data):
+    def train_model(self, data, best_params):
+
         try:
 
-            reader = Reader(rating_scale=(1,5))
+            reader = Reader(rating_scale=(1, 5))
 
             dataset = Dataset.load_from_df(
-                data[["UserID","MovieID","Rating"]],
+                data[["UserID", "MovieID", "Rating"]],
                 reader
             )
 
-            trainset, testset = train_test_split(dataset, test_size=0.2)
+            trainset, testset = train_test_split(
+                dataset,
+                test_size=0.2,
+                random_state=42
+            )
 
-            model = SVD()
+            model = SVD(
+                n_factors=best_params["n_factors"],
+                n_epochs=best_params["n_epochs"],
+                lr_all=best_params["lr_all"],
+                reg_all=best_params["reg_all"]
+            )
 
             model.fit(trainset)
 
-            logger.info("Model training completed")
+            predictions = model.test(testset)
+
+            rmse = accuracy.rmse(predictions)
+
+            print(f"Model training completed with RMSE: {rmse}")
 
             return model, testset
 
         except Exception as e:
-            raise CustomException(e, sys)
+            raise Exception(e)
