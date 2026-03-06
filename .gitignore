@@ -1,7 +1,37 @@
-venv/
+# Python
 __pycache__/
 *.pyc
-.DS_Store
-.env
-artifacts/
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.env/
+
+# Logs
 logs/
+*.log
+
+# Data
+data/
+datasets/
+
+# Artifacts
+artifacts/
+models/
+mlruns/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Mac
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Docker
+*.tar
+
+# Kubernetes temp
+*.yaml.bak
