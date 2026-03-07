@@ -120,7 +120,6 @@ rpds-py==0.30.0
 rsa==4.9.1
 ruamel.yaml==0.19.1
 scikit-learn==1.7.2
-scipy==1.11.4
 scmrepo==3.6.1
 seaborn==0.13.2
 semver==3.0.4
@@ -158,3 +157,5 @@ zc.lockfile==4.0
 zipp==3.23.0
 numpy>=1.25
 Cython<3
+scipy==1.11.4
+numpy==1.26.4
