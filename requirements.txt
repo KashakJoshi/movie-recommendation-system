@@ -157,5 +157,4 @@ zc.lockfile==4.0
 zipp==3.23.0
 numpy>=1.25
 Cython<3
-scipy==1.11.4
 numpy==1.26.4
