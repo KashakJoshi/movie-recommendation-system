@@ -158,3 +158,4 @@ zipp==3.23.0
 numpy>=1.25
 Cython<3
 numpy==1.26.4
+scikit-surprise
