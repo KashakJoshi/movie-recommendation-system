@@ -1,37 +1,48 @@
 # Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+pycache/
+.py[cod]
+$py.class
 
-# Virtual Environment
+# Virtual environment
 venv/
-.env/
+.env
+.env.
 
 # Logs
 logs/
-*.log
+.log
 
-# Data
-data/
-datasets/
-
-# Artifacts
-artifacts/
-models/
-mlruns/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Mac
+# OS files
 .DS_Store
+Thumbs.db
 
 # VS Code
 .vscode/
 
-# Docker
-*.tar
+# Jupyter
+.ipynb_checkpoints/
 
-# Kubernetes temp
-*.yaml.bak
+# MLflow
+mlruns/
+mlflow.db
+
+# Artifacts
+artifacts/*
+!artifacts/model/
+!artifacts/model/*
+
+# Data
+data/raw/
+data/processed/
+
+# Temporary
+tmp/
+temp/
+
+# Python build
+build/
+dist/
+*.egg-info/
+
+# Docker
+docker-compose.override.yml
