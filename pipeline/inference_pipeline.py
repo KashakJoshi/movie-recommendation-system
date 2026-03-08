@@ -1,5 +1,7 @@
 import joblib
 import pandas as pd
+import os
+
 
 
 class InferencePipeline:
@@ -7,8 +9,13 @@ class InferencePipeline:
     def __init__(self):
 
         # load trained model
-        self.model = joblib.load("artifacts/model/best_svd_model.pkl")
 
+        model_path = "artifacts/model/best_svd_model.pkl"
+
+        if os.path.exists(model_path):
+            self.model = joblib.load(model_path)
+        else:
+            self.model = None
         # load movies dataset
         self.movies = pd.read_csv(
         "data/movies.dat",
