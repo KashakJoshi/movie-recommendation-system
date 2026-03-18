@@ -4,3 +4,5 @@ pandas
 numpy==1.23.5
 scikit-surprise
 joblib
+gunicorn
+uvicorn
