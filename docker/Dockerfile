@@ -2,22 +2,25 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# VERY IMPORTANT — install build tools for scikit-surprise
+# system deps (important for scikit-surprise)
 RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
     g++ \
-    make \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# install python deps
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --upgrade pip
-RUN pip install numpy==1.23.5
-RUN pip install cython
-RUN pip install scikit-surprise
-RUN pip install -r requirements.txt
+# copy project code
+COPY api ./api
+COPY pipeline ./pipeline
+COPY artifacts ./artifacts
 
-COPY . .
+# expose render port
+EXPOSE 10000
 
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "10000"]
+# start server
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "api.main:app", "--bind", "0.0.0.0:10000"]
