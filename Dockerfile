@@ -20,8 +20,6 @@ COPY pipeline ./pipeline
 COPY mlartifacts ./mlartifacts
 
 
-# expose render port
-EXPOSE 10000
 
 # start server
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "api.main:app", "--bind", "0.0.0.0:10000"]
+CMD gunicorn -k uvicorn.workers.UvicornWorker api.main:app --bind 0.0.0.0:$PORT
