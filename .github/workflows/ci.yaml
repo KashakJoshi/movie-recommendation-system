@@ -34,4 +34,4 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f docker/Dockerfile -t movie-recommender .
+          docker build -f Dockerfile -t movie-recommender .
