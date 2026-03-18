@@ -17,7 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # copy project code
 COPY api ./api
 COPY pipeline ./pipeline
-COPY artifacts ./artifacts
+COPY mlartifacts ./mlartifacts
+
 
 # expose render port
 EXPOSE 10000
