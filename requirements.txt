@@ -158,4 +158,5 @@ uvicorn
 gunicorn
 joblib
 streamlit
-scikit-surprise
+numpy==1.24.4
+scikit-surprise==1.1.3
