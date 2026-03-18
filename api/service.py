@@ -1,40 +1,38 @@
 import os
+import pickle
 import pandas as pd
 from pipeline.inference_pipeline import InferencePipeline
 
-#  loading model pipeline
-pipeline = InferencePipeline()
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-movies_path = os.path.join(BASE_DIR, "artifacts", "movies.csv")
+class RecommendationService:
 
-movies_df = pd.read_csv(movies_path)
+    def __init__(self):
 
+        # ---- MODEL PATH ----
+        self.model_path = os.getenv("MODEL_PATH", "/app/model.pkl")
 
-def get_recommendations(user_id: int):
+        if not os.path.exists(self.model_path):
+            raise Exception(f"Model file not found at {self.model_path}")
 
-    movie_ids = movies_df["MovieID"].unique().tolist()
+        with open(self.model_path, "rb") as f:
+            self.model = pickle.load(f)
 
-    recommendations = pipeline.recommend_movies(user_id, movie_ids)
+        # ---- DATA PATH ----
+        self.data_path = os.getenv("DATA_PATH", "/app/api/ratings.csv")
 
-    results = []
+        if not os.path.exists(self.data_path):
+            raise Exception(f"Ratings file not found at {self.data_path}")
 
-    for rec in recommendations:
+        self.df = pd.read_csv(self.data_path)
 
-        movie_id = rec["movie_id"]
-        score = rec["predicted_rating"]
+        # ---- PIPELINE ----
+        self.pipeline = InferencePipeline(self.model, self.df)
 
-        movie_name = movies_df[
-            movies_df["MovieID"] == movie_id
-        ]["Title"].values[0]
+    def recommend(self, user_id: int, n: int = 5):
 
-        results.append({
-            "movie_id": int(movie_id),
-            "movie_name": movie_name,
-            "predicted_rating": round(float(score), 2)
-        })
+        recs = self.pipeline.get_recommendations(user_id, n)
 
-    return {
-        "user_id": user_id,
-        "recommendations": results
-    }
+        return {
+            "user_id": user_id,
+            "recommendations": recs
+        }
