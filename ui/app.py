@@ -4,7 +4,7 @@ import requests
 
 # Render deployment API URL
 API_URL = "https://your-api.onrender.com/recommend"
-# API_URL = "http://127.0.0.1:8000/recommend"
+#API_URL = "http://127.0.0.1:8000/recommend"
 
 
 st.set_page_config(
@@ -45,7 +45,7 @@ if st.button("Get Recommendations"):
                 rating = movie["predicted_rating"]
 
                 st.write(
-                    f"🎬 {movie['movie_name']} ⭐ Rating: {rating}"
+                    f"🎬 {movie['title']} ⭐ Rating: {rating}"
                 )
 
         else:
