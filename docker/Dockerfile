@@ -13,7 +13,10 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install numpy==1.23.5
+RUN pip install cython
+RUN pip install scikit-surprise
+RUN pip install -r requirements.txt
 
 COPY . .
 
