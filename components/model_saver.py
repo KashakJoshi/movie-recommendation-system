@@ -8,6 +8,6 @@ class ModelSaver:
 
         os.makedirs("artifacts/model", exist_ok=True)
 
-        joblib.dump(model, "artifacts/model/best_svd_model.pkl")
+        joblib.dump(model, "model.pkl")
 
         print("Model saved successfully")

@@ -152,9 +152,9 @@ zc.lockfile==4.0
 zipp==3.23.0
 Cython<3
 pandas
-numpy
 scipy
 fastapi
 uvicorn
 gunicorn
 joblib
+streamlit
