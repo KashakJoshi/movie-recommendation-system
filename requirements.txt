@@ -158,3 +158,4 @@ uvicorn
 gunicorn
 joblib
 streamlit
+scikit-surprise
