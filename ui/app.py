@@ -3,7 +3,8 @@ import requests
 
 
 # Render deployment API URL
-API_URL = "https://your-api.onrender.com/recommend"
+API_URL = "https://movie-recommendation-system-79b4.onrender.com/recommend"
+
 #API_URL = "http://127.0.0.1:8000/recommend"
 
 
